@@ -82,3 +82,43 @@
   window.addEventListener('resize', function () { if (!paused) { layout(); update(); } });
   applyMotion();
 })();
+
+// ---- recommendations: pop-up with the full text + arrow buttons ----
+(function () {
+  var section = document.getElementById('recommendations');
+  if (!section) return;
+
+  var dlg = document.getElementById('rec-dialog');
+  var stage = document.getElementById('rec-stage');
+  var body = document.getElementById('rd-body');
+
+  section.querySelectorAll('.rec-card').forEach(function (card) {
+    card.querySelector('.rec-open').addEventListener('click', function () {
+      var info = card.querySelector('.rec-full > div');
+      var cs = getComputedStyle(card);
+      dlg.style.setProperty('--dc', cs.getPropertyValue('--c'));
+      dlg.style.setProperty('--dt', cs.getPropertyValue('--t'));
+      document.getElementById('rd-name').textContent = card.querySelector('.rec-name').textContent;
+      document.getElementById('rd-role').textContent = info.dataset.role;
+      document.getElementById('rd-meta').textContent = info.dataset.meta;
+      body.innerHTML = '';
+      card.querySelectorAll('.rec-full p').forEach(function (p) {
+        body.appendChild(p.cloneNode(true));
+      });
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+      else dlg.setAttribute('open', '');
+    });
+  });
+
+  document.getElementById('rd-close').addEventListener('click', function () { dlg.close(); });
+  // clicking the dimmed backdrop closes it
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+  // arrows scroll the fan; skip the smooth animation when motion is paused
+  function go(dir) {
+    var calm = document.documentElement.classList.contains('no-motion');
+    stage.scrollBy({ left: dir * stage.clientWidth * 0.7, behavior: calm ? 'auto' : 'smooth' });
+  }
+  document.getElementById('rec-prev').addEventListener('click', function () { go(-1); });
+  document.getElementById('rec-next').addEventListener('click', function () { go(1); });
+})();
