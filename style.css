@@ -1,0 +1,105 @@
+:root{
+  --bg:#faf6f0;
+  --bg-alt:#f1e9de;
+  --ink:#2b2622;
+  --muted:#6f655b;
+  --accent:#b5622f;
+  --card:#423f3b;
+  --card-ink:#faf6f0;
+  --radius:18px;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--sans)}
+a{color:var(--accent)}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+h3{font-size:1.3rem;margin-top:1.6em}
+h4{font-size:1.05rem;margin-bottom:.3em}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:1.5rem;padding:.9rem clamp(1rem,4vw,2.5rem);background:rgba(250,246,240,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+.brand{font-family:var(--serif);font-weight:700;color:var(--ink);text-decoration:none;font-size:1.1rem}
+.nav nav{display:flex;gap:1.2rem;margin-left:auto;font-size:.92rem}
+.nav nav a{color:var(--ink);text-decoration:none}
+.nav nav a:hover{color:var(--accent)}
+.pill{font:500 .8rem var(--sans);border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:.4rem .9rem;cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:7rem clamp(1.2rem,8vw,7rem) 4rem;max-width:1100px;margin:0 auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.8rem;color:var(--accent);font-weight:600;margin:0 0 1rem}
+.lede{max-width:46ch;font-size:1.2rem;color:var(--muted)}
+.creds{font-size:.85rem;color:var(--muted);margin:.5rem 0 1.8rem}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;padding:.85rem 1.6rem;border-radius:999px;font-weight:500;transition:transform .2s,background .2s}
+.btn:hover{background:var(--accent);transform:translateY(-2px)}
+.hint{margin-top:3rem;font-size:.85rem;color:var(--muted)}
+
+/* 3D carousel */
+.stage{height:500vh;position:relative}
+.stage-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.stage-label{position:absolute;top:5.5rem;margin:0;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;color:var(--muted)}
+.stage-count{position:absolute;bottom:2rem;margin:0;font-family:var(--serif);color:var(--muted)}
+.scene{perspective:1400px;width:100%;height:60svh;display:flex;align-items:center;justify-content:center}
+.ring{position:relative;width:var(--cw,280px);height:var(--ch,380px);transform-style:preserve-3d;will-change:transform}
+.card{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem;border-radius:var(--radius);background:var(--card);color:var(--card-ink);text-decoration:none;box-shadow:0 20px 50px rgba(43,38,34,.25);transition:opacity .2s;backface-visibility:visible}
+.card:nth-child(3n+2){background:#8a4a24}
+.card:nth-child(3n){background:#2f4a43}
+.card .num{font-family:var(--serif);font-size:1rem;opacity:.7}
+.card h3{font-size:1.6rem;margin:0}
+.card p{margin:.6rem 0 0;font-size:.95rem;opacity:.85}
+.card .open{font-weight:600;font-size:.9rem}
+.card:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* reduced / paused motion: static grid */
+.no-motion .stage{height:auto}
+.no-motion .stage-pin{position:static;height:auto;padding:5rem clamp(1rem,5vw,4rem)}
+.no-motion .stage-label{position:static;margin-bottom:1.5rem}
+.no-motion .stage-count{display:none}
+.no-motion .scene{perspective:none;height:auto}
+.no-motion .ring{width:100%;height:auto;transform:none!important;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.no-motion .card{position:relative;inset:auto;transform:none!important;opacity:1!important;pointer-events:auto!important;min-height:220px}
+
+/* content blocks */
+.block{padding:6rem clamp(1.2rem,8vw,7rem);max-width:1100px;margin:0 auto}
+.block.alt{max-width:none;background:var(--bg-alt)}
+.block.alt>*{max-width:1000px;margin-left:auto;margin-right:auto}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem}
+.lede-sm{color:var(--muted);max-width:60ch}
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.tags li{border:1px solid var(--ink);border-radius:999px;padding:.25rem .9rem;font-size:.9rem}
+.links{display:flex;flex-wrap:wrap;gap:1.2rem}
+.muted{color:var(--muted);margin-top:2rem}
+.when{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.3rem}
+
+.timeline{list-style:none;padding:0;margin:2rem auto;border-left:2px solid var(--accent)}
+.timeline li{padding:0 0 2rem 1.6rem;position:relative}
+.timeline li::before{content:"";position:absolute;left:-7px;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline h3{margin:.1rem 0 .5rem;font-size:1.15rem}
+.timeline p{margin:.4rem 0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.5rem 0}
+.tile{background:var(--bg);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius);padding:1.2rem 1.3rem;color:var(--ink);text-decoration:none}
+.alt .tile{background:var(--bg)}
+.tile p{margin:0;font-size:.95rem;color:var(--muted)}
+.tile.link{transition:transform .2s,box-shadow .2s}
+.tile.link:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.1)}
+
+.flow{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.6rem;counter-reset:s}
+.flow li{counter-increment:s;background:var(--ink);color:var(--bg);padding:.5rem 1rem;border-radius:999px;font-size:.9rem}
+.flow li::before{content:counter(s) ". ";opacity:.6}
+
+.post{border-top:1px solid rgba(0,0,0,.1);padding:1.4rem 0}
+.post h3{margin:.2rem 0 .4rem}
+
+.foot{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:760px){
+  .nav nav{display:none}
+  .nav .pill{margin-left:auto}
+  .stage{height:420vh}
+}
